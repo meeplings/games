@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Games</string>
-    <string name="title_activity_tic_tac_toe">TicTacToe</string>
+    <string name="title_activity_tic_tac_toe">Tic Tac Toe</string>
+
+    <string name="startTTT">Play Tic Tac Toe</string>
+
+    <string name="night">Night Theme</string>
+    <string name="sea">Sea Theme</string>
+    <string name="vs">Versus Theme</string>
+
+    <string name="empty_box">Make your move</string>
+    <string name="p1">Player 1\'s turn</string>
+    <string name="p2">Player 2\'s turn</string>
 </resources>

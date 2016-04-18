@@ -10,9 +10,11 @@ public class BoardPiece extends ImageButton {
     private Drawable blank,complete;
     private Drawable state1,state2;
     private int xCo,yCo;
+    private static int type;
 
     public BoardPiece(Context c, Drawable blank, Drawable complete, Drawable one,Drawable two){
         super(c);
+        type = 0;
         this.blank = blank;
         this.complete = complete;
         state1 = one;
@@ -65,5 +67,17 @@ public class BoardPiece extends ImageButton {
 
     public void setxCo(int xCo) {
         this.xCo = xCo;
+    }
+
+    public Drawable getComplete() {
+        return complete;
+    }
+
+    public static int getType() {
+        return type;
+    }
+
+    public static void setType(int type) {
+        BoardPiece.type = type;
     }
 }
