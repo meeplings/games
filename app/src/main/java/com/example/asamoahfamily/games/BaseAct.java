@@ -9,6 +9,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -47,6 +48,7 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         return ContextCompat.getDrawable(this,R.drawable.box);
     }
 
+
     public int changePlayer(){
         if(turn)
             return R.string.p1;
@@ -69,7 +71,6 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         player = new TextView(this);
         player.setText(R.string.p1);
         oMenu = new ImageButton(this);
-        oMenu.setBackground(ContextCompat.getDrawable(this,R.drawable.list_ingredients));
         oMenu.setOnClickListener(new ImageButton.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -78,6 +79,7 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         });
 
         top.addView(player);
+        top.addView(oMenu);
         player.setVisibility(View.VISIBLE);
         top.setOverflowIcon(ContextCompat.getDrawable(this,R.drawable.list_ingredients));
         setSupportActionBar(top);
@@ -128,5 +130,41 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         Intent i = new Intent(this,HomeScreen.class);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.nav_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+            int id = item.getItemId();
+
+            switch(id){
+                case R.id.menuTTT:
+                    toTTT(item);
+                    break;
+                case R.id.menuNight:
+                    bg.setBackground(ContextCompat.getDrawable(this,R.drawable.night_bng));
+                    Toast.makeText(this,R.string.night,Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.menuSea:
+                    bg.setBackground(ContextCompat.getDrawable(this,R.drawable.sea_bng));
+                    Toast.makeText(this,R.string.sea,Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.menuVS:
+                    bg.setBackground(ContextCompat.getDrawable(this,R.drawable.vs_bng));
+                    Toast.makeText(this,R.string.vs,Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    toHome(item);
+                    break;
+            }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,9 +8,11 @@
     <group android:id="@+id/themeGroup">
         <item android:title="@string/vs"
             android:id="@+id/menuVS"/>
-        <item android:title="@string/vs"
+
+        <item android:title="@string/sea"
             android:id="@+id/menuSea"/>
-        <item android:title="@string/vs"
+
+        <item android:title="@string/night"
             android:id="@+id/menuNight"/>
     </group>
 
