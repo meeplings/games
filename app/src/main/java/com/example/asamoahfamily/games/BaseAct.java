@@ -129,4 +129,8 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         startActivity(i);
         finish();
     }
+    
+    public void checkWin(boolean b){
+        return false;
+    }
 }
