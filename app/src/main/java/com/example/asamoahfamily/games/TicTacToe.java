@@ -62,6 +62,8 @@ public class TicTacToe extends BaseAct {
         turn =!turn;
         player.setText(changePlayer());
     }
+    
+    //TODO: Change gridlayout to tablelayout for array stuffs
 
 
 //    private void checkWin(){
