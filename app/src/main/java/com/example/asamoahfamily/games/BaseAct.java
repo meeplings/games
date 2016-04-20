@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +25,8 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     public static final String TAG = "QQQQQ";
     protected Toolbar top;
     protected ImageView bg;
-    protected ImageButton oMenu;
     protected TextView player;
+    protected DrawerLayout drawer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +50,8 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         return ContextCompat.getDrawable(this,R.drawable.box);
     }
 
-
-    public int changePlayer(){
+    public int changePlayer(int x){
+        changeType(x);
         if(turn)
             return R.string.p1;
         else
@@ -70,54 +72,63 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         top = (Toolbar) findViewById(R.id.toolbar);
         player = new TextView(this);
         player.setText(R.string.p1);
-        oMenu = new ImageButton(this);
-        oMenu.setOnClickListener(new ImageButton.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                getSupportActionBar().openOptionsMenu();
-            }
-        });
 
         top.addView(player);
-        top.addView(oMenu);
         player.setVisibility(View.VISIBLE);
-        top.setOverflowIcon(ContextCompat.getDrawable(this,R.drawable.list_ingredients));
+
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, top, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         setSupportActionBar(top);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        assert navigationView!=null;
+        navigationView.setNavigationItemSelectedListener(this);
 
         assert  getSupportActionBar()!=null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().show();
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
 
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Intent i;
+
         switch(id){
-            case R.id.menuTTT:
-                toTTT(item);
+            case R.id.navTTT:
+                i = new Intent(this,TicTacToe.class);
+                startActivity(i);
+                finish();
                 break;
-            case R.id.menuNight:
-                bg.setBackground(ContextCompat.getDrawable(this,R.drawable.night_bng));
-                Toast.makeText(this,R.string.night,Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menuSea:
-                bg.setBackground(ContextCompat.getDrawable(this,R.drawable.sea_bng));
-                Toast.makeText(this,R.string.sea,Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menuVS:
-                bg.setBackground(ContextCompat.getDrawable(this,R.drawable.vs_bng));
-                Toast.makeText(this,R.string.vs,Toast.LENGTH_SHORT).show();
+            case R.id.navNim:
+                i = new Intent(this,Nim.class);
+                startActivity(i);
+                finish();
                 break;
             default:
-                toHome(item);
-                break;
+                i = new Intent(this,HomeScreen.class);
+                startActivity(i);
+                finish();
         }
-
-        return false;
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     public void toTTT(MenuItem v){
@@ -167,4 +178,5 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
 
         return super.onOptionsItemSelected(item);
     }
+
 }

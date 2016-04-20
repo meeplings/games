@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
-import android.widget.GridLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 
 public class TicTacToe extends BaseAct {
 
-    GridLayout mBoard;
+    TableLayout mBoard;
+    TableRow r1,r2,r3;
     Drawable p1,p2;
 
     @Override
@@ -19,12 +21,14 @@ public class TicTacToe extends BaseAct {
 
         screenTools();
 
-        BoardPiece.setType(1);
-
         p1 = ContextCompat.getDrawable(this,R.drawable.o);
         p2 = ContextCompat.getDrawable(this,R.drawable.x);
 
-        mBoard = (GridLayout) findViewById(R.id.ttt);
+        mBoard = (TableLayout) findViewById(R.id.ttt);
+        r1 = (TableRow) findViewById(R.id.tttr1);
+        r2 = (TableRow) findViewById(R.id.tttr2);
+        r3 = (TableRow) findViewById(R.id.tttr3);
+
         assert mBoard!=null;
         Log.d(TAG,mBoard.getWidth()+"");
 
@@ -42,37 +46,50 @@ public class TicTacToe extends BaseAct {
 
     public void swapPiece(View v){
 
-//        int width = v.getWidth();
-//        int height = v.getHeight();
-        int i = mBoard.indexOfChild(v);
-
-        mBoard.removeView(v);
-        v.destroyDrawingCache();
+        TableRow mParent = (TableRow) v.getParent();
 
         BoardPiece mPiece = new BoardPiece(this);
         mPiece.setBackground(getImage(turn));
 
-        mPiece.setxCo(i%3+1);
-        mPiece.setyCo((i/3) +1);
+        mPiece.setLayoutParams(v.getLayoutParams());
 
-        mPiece.setMaxWidth(100);
-        mPiece.setMaxHeight(100);
-        mBoard.addView(mPiece,i);
+        mPiece.setxCo(mParent.indexOfChild(v));
+        switch(mParent.getId()) {
+            case R.id.tttr1:
+                mPiece.setyCo(1);
+                break;
+            case R.id.tttr2:
+                mPiece.setyCo(2);
+                break;
+            case R.id.tttr3:
+                mPiece.setyCo(3);
+                break;
+            default:
+                throw new IndexOutOfBoundsException("CHILD NOT IN PARENT");
+        }
+
+        mParent.removeView(v);
+        v.destroyDrawingCache();
+
+        mParent.addView(mPiece,mPiece.getxCo());
 
         turn =!turn;
-        player.setText(changePlayer());
+        player.setText(changePlayer(mPiece.getType()));
+
+//        if(checkHor())
+//            Toast.makeText(this,"GAME OVER",Toast.LENGTH_LONG).show();
     }
+    
+    //TODO: Change gridlayout to tablelayout for array stuffs
 
+    public boolean checkHor(){
 
-
-
-//    private void checkWin(){
-//        int x = 0;
-//        for(int i = 0; i < mBoard.getWidth(); i++){
-//            for(int j = 0; j < mBoard.getHeight(); j++){
-//                if(((BoardPiece) mBoard.getChildAt(x)).getx )
-//            }
-//        }
-//    }
+        return (((BoardPiece) r1.getChildAt(0)).getType() == ((BoardPiece) r1.getChildAt(1)).getType() &&
+                ((BoardPiece) r1.getChildAt(0)).getType() == ((BoardPiece) r1.getChildAt(2)).getType()) ||
+                (((BoardPiece) r2.getChildAt(0)).getType() == ((BoardPiece) r2.getChildAt(1)).getType() &&
+                ((BoardPiece) r2.getChildAt(0)).getType() == ((BoardPiece) r2.getChildAt(2)).getType())||
+                (((BoardPiece) r3.getChildAt(0)).getType() == ((BoardPiece) r3.getChildAt(1)).getType() &&
+                ((BoardPiece) r3.getChildAt(0)).getType() == ((BoardPiece) r3.getChildAt(2)).getType());
+    }
 
 }

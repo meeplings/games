@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Games</string>
+    <string name="app_desc">Grand Ether</string>
     <string name="title_activity_tic_tac_toe">Tic Tac Toe</string>
+    <string name="creator">Jeff Asamoah</string>
 
     <string name="startTTT">Play Tic Tac Toe</string>
+    <string name="startNim">Play Nim</string>
 
     <string name="night">Night Theme</string>
     <string name="sea">Sea Theme</string>
@@ -11,4 +14,11 @@
     <string name="empty_box">Make your move</string>
     <string name="p1">Player 1\'s turn</string>
     <string name="p2">Player 2\'s turn</string>
+    <string name="title_activity_games_list">gamesList</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_nim">Nim</string>
 </resources>

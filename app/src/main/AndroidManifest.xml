@@ -18,6 +18,14 @@
         <activity
             android:name=".TicTacToe"
             android:label="@string/title_activity_tic_tac_toe"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".gamesList"
+            android:label="@string/title_activity_games_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Nim"
+            android:label="@string/title_activity_nim"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
