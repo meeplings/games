@@ -36,7 +36,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
         <ImageButton
             android:layout_width="80dp"
@@ -49,10 +50,11 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/box"
             android:contentDescription="@string/empty_box"
@@ -62,7 +64,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
     </TableRow>
 
     <TableRow
@@ -87,7 +90,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
         <ImageButton
             android:layout_width="80dp"
@@ -100,7 +104,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
         <ImageButton
             android:layout_width="80dp"
@@ -113,7 +118,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
     </TableRow>
 
@@ -140,7 +146,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
         <ImageButton
             android:layout_width="80dp"
@@ -153,7 +160,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
         <ImageButton
             android:layout_width="80dp"
@@ -166,7 +174,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:padding="0dp"
-            android:onClick="swapPiece" />
+            android:onClick="tttPiece"
+            android:tag="@string/empty_box" />
 
     </TableRow>
 

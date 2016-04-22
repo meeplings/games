@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,6 +10,228 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.asamoahfamily.games.Nim"
-    tools:showIn="@layout/activity_nim">
+    android:gravity="center">
+    
+    <TableRow
+        android:id="@+id/nimr1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="3dp">
 
-</RelativeLayout>
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton10"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton11"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton12"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/nimr2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:gravity="center"
+        android:padding="2.5dp">
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton13"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton14"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton15"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton16"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton17"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/nimr3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:gravity="center">
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton18"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton19"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton20"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton21"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton22"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton23"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/o"
+            android:contentDescription="@string/empty_box"
+            android:id="@+id/imageButton24"
+            android:layout_gravity="center|fill"
+            android:cropToPadding="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:padding="2.5dp"
+            android:onClick="nimPiece" />
+    </TableRow>
+    
+    
+
+</TableLayout>

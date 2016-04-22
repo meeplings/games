@@ -1,19 +1,23 @@
 <resources>
     <string name="app_name">Games</string>
-    <string name="app_desc">Grand Ether</string>
+    <string name="app_desc">Infinite Ether</string>
     <string name="title_activity_tic_tac_toe">Tic Tac Toe</string>
     <string name="creator">Jeff Asamoah</string>
 
     <string name="startTTT">Play Tic Tac Toe</string>
     <string name="startNim">Play Nim</string>
+    <string name="home">Home Screen</string>
+    <string name="repeat">Play again?</string>
 
     <string name="night">Night Theme</string>
     <string name="sea">Sea Theme</string>
     <string name="vs">Versus Theme</string>
 
-    <string name="empty_box">Make your move</string>
+    <string name="empty_box">empty</string>
     <string name="p1">Player 1\'s turn</string>
     <string name="p2">Player 2\'s turn</string>
+    <string name="gameOver">Game Over</string>
+    <string name="tie">Tie Game \nEveryone Loses</string>
     <string name="title_activity_games_list">gamesList</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

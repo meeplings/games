@@ -3,7 +3,6 @@ package com.example.asamoahfamily.games;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -30,7 +29,6 @@ public class TicTacToe extends BaseAct {
         r3 = (TableRow) findViewById(R.id.tttr3);
 
         assert mBoard!=null;
-        Log.d(TAG,mBoard.getWidth()+"");
 
         //True --> Player 1
         //False --> Player 2
@@ -44,7 +42,7 @@ public class TicTacToe extends BaseAct {
             return p2;
     }
 
-    public void swapPiece(View v){
+    public void tttPiece(View v){
 
         TableRow mParent = (TableRow) v.getParent();
 
@@ -54,6 +52,8 @@ public class TicTacToe extends BaseAct {
         mPiece.setLayoutParams(v.getLayoutParams());
 
         mPiece.setxCo(mParent.indexOfChild(v));
+        mPiece.setClickable(false);
+        mPiece.setTag(Boolean.toString(turn));
         switch(mParent.getId()) {
             case R.id.tttr1:
                 mPiece.setyCo(1);
@@ -76,20 +76,54 @@ public class TicTacToe extends BaseAct {
         turn =!turn;
         player.setText(changePlayer(mPiece.getType()));
 
-//        if(checkHor())
-//            Toast.makeText(this,"GAME OVER",Toast.LENGTH_LONG).show();
+        if(checkTie())
+            tiePopup();
+
+        else if(checkWin(mPiece))
+            gameOverPopup();
+
     }
     
     //TODO: Change gridlayout to tablelayout for array stuffs
 
-    public boolean checkHor(){
+    public boolean checkWin(View v){
 
-        return (((BoardPiece) r1.getChildAt(0)).getType() == ((BoardPiece) r1.getChildAt(1)).getType() &&
-                ((BoardPiece) r1.getChildAt(0)).getType() == ((BoardPiece) r1.getChildAt(2)).getType()) ||
-                (((BoardPiece) r2.getChildAt(0)).getType() == ((BoardPiece) r2.getChildAt(1)).getType() &&
-                ((BoardPiece) r2.getChildAt(0)).getType() == ((BoardPiece) r2.getChildAt(2)).getType())||
-                (((BoardPiece) r3.getChildAt(0)).getType() == ((BoardPiece) r3.getChildAt(1)).getType() &&
-                ((BoardPiece) r3.getChildAt(0)).getType() == ((BoardPiece) r3.getChildAt(2)).getType());
+        TableRow par = (TableRow) v.getParent();
+
+        boolean hor,vert,dia;
+
+        hor = checkHor(par);
+        vert = checkVert(par.indexOfChild(v));
+        dia = checkDiagonal();
+
+        return hor || vert || dia;
+    }
+
+    public boolean checkHor(TableRow v){
+        return (v.getChildAt(0).getTag().equals(v.getChildAt(1).getTag())
+                && v.getChildAt(0).getTag().equals(v.getChildAt(2).getTag()));
+    }
+
+    public boolean checkVert(int index){
+
+        return r1.getChildAt(index).getTag().equals(r2.getChildAt(index).getTag()) &&
+                r1.getChildAt(index).getTag().equals(r3.getChildAt(index).getTag());
+    }
+
+    public boolean checkDiagonal() {
+        return !(r3.getChildAt(0).getTag().equals(getResources().getString(R.string.empty_box)) && r3.getChildAt(2).getTag().equals(getResources().getString(R.string.empty_box))) &&
+                ((r1.getChildAt(0).getTag().equals(r2.getChildAt(1).getTag()) && r1.getChildAt(0).getTag().equals(r3.getChildAt(2).getTag())) ||
+                        (r1.getChildAt(2).getTag().equals(r2.getChildAt(1).getTag()) && r1.getChildAt(2).getTag().equals(r3.getChildAt(0).getTag())));
+    }
+
+    public boolean checkTie(){
+        for(int i = 0; i < r1.getChildCount(); i++){
+            if(r1.getChildAt(i).isClickable() ||
+                    r2.getChildAt(i).isClickable() ||
+                    r3.getChildAt(i).isClickable())
+                return false;
+        }
+        return true;
     }
 
 }

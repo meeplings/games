@@ -1,6 +1,7 @@
 package com.example.asamoahfamily.games;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,28 +11,26 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class BaseAct extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     protected boolean turn;
     public static final String TAG = "QQQQQ";
     protected Toolbar top;
-    protected ImageView bg;
     protected TextView player;
     protected DrawerLayout drawer;
+    protected NavigationView mNav;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         turn = true;
     }
 
@@ -67,7 +66,6 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     protected void screenTools(){
-        bg = (ImageView) findViewById(R.id.bg);
 
         top = (Toolbar) findViewById(R.id.toolbar);
         player = new TextView(this);
@@ -75,6 +73,9 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
 
         top.addView(player);
         player.setVisibility(View.VISIBLE);
+        setSupportActionBar(top);
+        assert getSupportActionBar()!=null;
+        getSupportActionBar().show();
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -84,14 +85,10 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        setSupportActionBar(top);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        assert navigationView!=null;
-        navigationView.setNavigationItemSelectedListener(this);
-
-        assert  getSupportActionBar()!=null;
-        getSupportActionBar().show();
+        mNav = (NavigationView) findViewById(R.id.nav_view);
+        assert mNav!=null;
+        mNav.setNavigationItemSelectedListener(this);
 
     }
 
@@ -101,7 +98,8 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            startActivity(getParentActivityIntent());
+            finish();
         }
     }
 
@@ -109,30 +107,32 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Intent i;
-
         switch(id){
             case R.id.navTTT:
-                i = new Intent(this,TicTacToe.class);
-                startActivity(i);
-                finish();
+                toTTT(item);
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.navNim:
-                i = new Intent(this,Nim.class);
-                startActivity(i);
-                finish();
+                toNim(item);
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             default:
-                i = new Intent(this,HomeScreen.class);
-                startActivity(i);
-                finish();
+                toHome(item);
+                drawer.closeDrawer(GravityCompat.START);
+                break;
         }
-        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
     public void toTTT(MenuItem v){
         Intent i = new Intent(this,TicTacToe.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void toNim(MenuItem v){
+        Intent i = new Intent(this,Nim.class);
         startActivity(i);
         finish();
     }
@@ -153,30 +153,56 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-            int id = item.getItemId();
-
-            switch(id){
-                case R.id.menuTTT:
-                    toTTT(item);
-                    break;
-                case R.id.menuNight:
-                    bg.setBackground(ContextCompat.getDrawable(this,R.drawable.night_bng));
-                    Toast.makeText(this,R.string.night,Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.menuSea:
-                    bg.setBackground(ContextCompat.getDrawable(this,R.drawable.sea_bng));
-                    Toast.makeText(this,R.string.sea,Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.menuVS:
-                    bg.setBackground(ContextCompat.getDrawable(this,R.drawable.vs_bng));
-                    Toast.makeText(this,R.string.vs,Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    toHome(item);
-                    break;
-            }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    public void gameOverPopup(){
+
+        String mess = getResources().getString(R.string.p2);
+        if(!turn)
+            mess = getResources().getString(R.string.p1);
+
+        AlertDialog.Builder mBuild = new AlertDialog.Builder(this);
+        mBuild.setMessage(getResources().getString(R.string.gameOver) + "\n"
+                + mess + " wins!");
+        mBuild.setNegativeButton(R.string.repeat, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                recreate();
+            }
+        });
+        mBuild.setPositiveButton(R.string.home, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(getBaseContext(),HomeScreen.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        AlertDialog pop = mBuild.create();
+        pop.show();
+    }
+
+    public void tiePopup(){
+
+        AlertDialog.Builder mBuild = new AlertDialog.Builder(this);
+        mBuild.setMessage(R.string.tie);
+        mBuild.setNegativeButton(R.string.repeat, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                recreate();
+            }
+        });
+        mBuild.setPositiveButton(R.string.home, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent i = new Intent(getBaseContext(),HomeScreen.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        AlertDialog pop = mBuild.create();
+        pop.show();
     }
 
 }
