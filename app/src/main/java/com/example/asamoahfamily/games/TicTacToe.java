@@ -28,8 +28,6 @@ public class TicTacToe extends BaseAct {
         r2 = (TableRow) findViewById(R.id.tttr2);
         r3 = (TableRow) findViewById(R.id.tttr3);
 
-        assert mBoard!=null;
-
         //True --> Player 1
         //False --> Player 2
 
@@ -43,6 +41,8 @@ public class TicTacToe extends BaseAct {
     }
 
     public void tttPiece(View v){
+        
+        //Sets up characteristics of clicked buttons 
 
         TableRow mParent = (TableRow) v.getParent();
 
@@ -84,8 +84,6 @@ public class TicTacToe extends BaseAct {
 
     }
     
-    //TODO: Change gridlayout to tablelayout for array stuffs
-
     public boolean checkWin(View v){
 
         TableRow par = (TableRow) v.getParent();
@@ -100,23 +98,28 @@ public class TicTacToe extends BaseAct {
     }
 
     public boolean checkHor(TableRow v){
+        //Checks to see if the tags for each button in a row are =
         return (v.getChildAt(0).getTag().equals(v.getChildAt(1).getTag())
                 && v.getChildAt(0).getTag().equals(v.getChildAt(2).getTag()));
     }
 
     public boolean checkVert(int index){
-
+        //Checks to see if the tags for each button in a col are =
         return r1.getChildAt(index).getTag().equals(r2.getChildAt(index).getTag()) &&
                 r1.getChildAt(index).getTag().equals(r3.getChildAt(index).getTag());
     }
 
     public boolean checkDiagonal() {
+        //Checks to see if the 2 diagonals for TTT have equal tags for their buttons
+        //Also makes sure that they aren't the starting tags
+        //TODO Figure out why it says P1 wins after each round ends
         return !(r3.getChildAt(0).getTag().equals(getResources().getString(R.string.empty_box)) && r3.getChildAt(2).getTag().equals(getResources().getString(R.string.empty_box))) &&
                 ((r1.getChildAt(0).getTag().equals(r2.getChildAt(1).getTag()) && r1.getChildAt(0).getTag().equals(r3.getChildAt(2).getTag())) ||
                         (r1.getChildAt(2).getTag().equals(r2.getChildAt(1).getTag()) && r1.getChildAt(2).getTag().equals(r3.getChildAt(0).getTag())));
     }
 
     public boolean checkTie(){
+        //Checks to make sure each box is clicked
         for(int i = 0; i < r1.getChildCount(); i++){
             if(r1.getChildAt(i).isClickable() ||
                     r2.getChildAt(i).isClickable() ||

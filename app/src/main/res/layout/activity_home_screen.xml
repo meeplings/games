@@ -9,12 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.asamoahfamily.games.HomeScreen">
 
-    <Button
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/homeGameList"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_centerVertical="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/listID"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="toTTT" />
+        android:layout_marginBottom="64dp" />
 </RelativeLayout>

@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,20 +29,13 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     protected DrawerLayout drawer;
     protected NavigationView mNav;
 
+    protected DisplayMetrics dm;
+    protected int scale;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         turn = true;
-    }
-
-    protected Drawable changeTurn(Drawable a, Drawable b){
-        Drawable newImage;
-        if(turn)
-            newImage = a;
-        else
-            newImage = b;
-        turn = !turn;
-        return newImage;
     }
 
     public Drawable getImage(boolean b){
@@ -66,6 +60,11 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     protected void screenTools(){
+        //Sets up Action bar + Side Nav bar
+
+        dm = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        scale = Math.round(dm.density);
 
         top = (Toolbar) findViewById(R.id.toolbar);
         player = new TextView(this);
@@ -157,7 +156,7 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     public void gameOverPopup(){
-
+        //Popup dialog for winner
         String mess = getResources().getString(R.string.p2);
         if(!turn)
             mess = getResources().getString(R.string.p1);
@@ -184,7 +183,7 @@ public class BaseAct extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     public void tiePopup(){
-
+        //Popup dialog for tie game
         AlertDialog.Builder mBuild = new AlertDialog.Builder(this);
         mBuild.setMessage(R.string.tie);
         mBuild.setNegativeButton(R.string.repeat, new DialogInterface.OnClickListener() {

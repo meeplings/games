@@ -6,8 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.asamoahfamily.games.Nim">
 
-    <include layout="@layout/content_nim"/>
     <include layout="@layout/activity_games_list"/>
-
+    <include layout="@layout/content_nim"/>
 
 </android.support.design.widget.CoordinatorLayout>
